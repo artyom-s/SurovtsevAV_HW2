@@ -52,8 +52,8 @@ class ViewController: UIViewController {
         
 // Sliders visual setup
         
-        sliderColorRed.value = 1
-        sliderColorRed.minimumValue = 1
+        sliderColorRed.value = 0
+        sliderColorRed.minimumValue = 0
         sliderColorRed.maximumValue = 10
         sliderColorRed.minimumTrackTintColor = .red
         sliderColorRed.thumbTintColor = .red
@@ -78,34 +78,22 @@ class ViewController: UIViewController {
 
     }
     
-// Slider values in valuesCount
+// Change color by sliders
     
     @IBAction func sliderRedAction() {
         colorRedValue.text = String (format: "%.0f", sliderColorRed.value)
-        colorBoardMain.backgroundColor = UIColor(
-            red: CGFloat (sliderColorRed.value) * 25.5 / 255,
-            green: CGFloat (sliderColorGreen.value) * 25.5 / 255,
-            blue: CGFloat (sliderColorBlue.value) * 25.5 / 255,
-            alpha: 1.0
-        )
+        manualRedTF.text = colorRedValue.text
+        changeMainColor()
     }
     @IBAction func sliderGreenAction() {
         colorGreenValue.text = String (format: "%.0f", sliderColorGreen.value)
-        colorBoardMain.backgroundColor = UIColor(
-            red: CGFloat (sliderColorRed.value) * 25.5 / 255,
-            green: CGFloat (sliderColorGreen.value) * 25.5 / 255,
-            blue: CGFloat (sliderColorBlue.value) * 25.5 / 255,
-            alpha: 1.0
-        )
+        manualGreenTF.text = colorGreenValue.text
+        changeMainColor()
     }
     @IBAction func sliderBlueAction() {
         colorBlueValue.text = String (format: "%.0f", sliderColorBlue.value)
-        colorBoardMain.backgroundColor = UIColor(
-            red: CGFloat (sliderColorRed.value) * 25.5 / 255,
-            green: CGFloat (sliderColorGreen.value) * 25.5 / 255,
-            blue: CGFloat (sliderColorBlue.value) * 25.5 / 255,
-            alpha: 1.0
-        )
+        manualBlueTF.text = colorBlueValue.text
+        changeMainColor()
     }
     
 // Save and restore color
@@ -128,18 +116,36 @@ class ViewController: UIViewController {
             colorRedValue.text = "0"
             colorGreenValue.text = "0"
             colorBlueValue.text = "0"
+            manualRedTF.text = "0"
+            manualGreenTF.text = "0"
+            manualBlueTF.text = "0"
+            
             saveAndRestoreColorButton.setTitle("SAVE COLOR", for: .normal)
             saveAndRestoreColorButton.backgroundColor = UIColor(red: 1/255, green: 1/255, blue: 1/255, alpha: 1.0)
         }
     }
 
+// Manual change color
+    
+    @IBAction func manualRedTFEntering() {
+        colorRedValue.text = manualRedTF.text
+        sliderColorRed.value = (manualRedTF.text! as NSString).floatValue
+        changeMainColor()
+        }
+  
+    @IBAction func manualGreenTFEntering() {
+        colorGreenValue.text = manualGreenTF.text
+        sliderColorGreen.value = (manualGreenTF.text! as NSString).floatValue
+        changeMainColor()
+    }
 
-// Manual peek
-    
-    
-    
-    
-// Manual peek button
+    @IBAction func manualBlueTFEntering() {
+        colorBlueValue.text = manualBlueTF.text
+        sliderColorBlue.value = (manualBlueTF.text! as NSString).floatValue
+        changeMainColor()
+    }
+
+// Manual-sliders switch
     
     @IBAction func manualPeekOnOff() {
         colorRedValue.isHidden.toggle()
@@ -158,6 +164,15 @@ class ViewController: UIViewController {
     }
     
 }
-
+extension ViewController {
+    func changeMainColor() {
+        colorBoardMain.backgroundColor = UIColor(
+            red: CGFloat (sliderColorRed.value) * 25.5 / 255,
+            green: CGFloat (sliderColorGreen.value) * 25.5 / 255,
+            blue: CGFloat (sliderColorBlue.value) * 25.5 / 255,
+            alpha: 1.0
+            )
+    }
+}
 
 

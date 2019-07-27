@@ -37,18 +37,23 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZ2-yl-KJW">
-                                        <rect key="frame" x="246" y="13" width="36" height="24"/>
+                                        <rect key="frame" x="246" y="13" width="34" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16Q-vE-gjM">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16Q-vE-gjM">
                                         <rect key="frame" x="240" y="10" width="34" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <action selector="manualRedTFEntering" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="4WO-k4-xIY"/>
+                                            <action selector="manualRedTFEntering" destination="BYZ-38-t0r" eventType="editingDidEnd" id="9f8-TQ-8SZ"/>
+                                            <action selector="manualRedTFEntering" destination="BYZ-38-t0r" eventType="valueChanged" id="Mh6-Q1-Pkt"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hk4-7g-PeF">
                                         <rect key="frame" x="18" y="13" width="80" height="24"/>
@@ -85,12 +90,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJA-8d-nDT">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJA-8d-nDT">
                                         <rect key="frame" x="240" y="10" width="34" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <connections>
+                                            <action selector="manualGreenTFEntering" destination="BYZ-38-t0r" eventType="touchDragEnter" id="5D3-ha-gmH"/>
+                                            <action selector="manualGreenTFEntering" destination="BYZ-38-t0r" eventType="valueChanged" id="5QM-F0-ThZ"/>
+                                            <action selector="manualGreenTFEntering" destination="BYZ-38-t0r" eventType="editingDidEnd" id="973-jC-gA4"/>
+                                            <action selector="manualGreenTFEntering" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="hYX-LN-kUI"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.035672488412628933" green="1" blue="0.0" alpha="0.371368838028169" colorSpace="custom" customColorSpace="sRGB"/>
@@ -120,12 +131,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NzO-c8-dZI">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NzO-c8-dZI">
                                         <rect key="frame" x="240" y="10" width="34" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <connections>
+                                            <action selector="manualBlueTFEntering" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="TIg-hd-O79"/>
+                                            <action selector="manualBlueTFEntering" destination="BYZ-38-t0r" eventType="editingDidEnd" id="d2e-oJ-UBi"/>
+                                            <action selector="manualBlueTFEntering" destination="BYZ-38-t0r" eventType="editingChanged" id="ia7-MR-UBl"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.28952955319322982" blue="1" alpha="0.36152068661971831" colorSpace="custom" customColorSpace="sRGB"/>
