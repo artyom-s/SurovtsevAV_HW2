@@ -25,9 +25,9 @@ class ViewController: UIViewController {
     @IBOutlet var sliderColorBlue: UISlider!
     
     @IBOutlet var saveAndRestoreColorButton: UIButton!
-    @IBOutlet var manualPeekLabel: UILabel!
-    @IBOutlet var manualPeekSwitch: UISwitch!
-    
+    @IBOutlet var manualPickLabel: UILabel!
+    @IBOutlet var manualPickSwitch: UISwitch!
+  
     @IBOutlet var redTF: UILabel!
     @IBOutlet var greenTF: UILabel!
     @IBOutlet var blueTF: UILabel!
@@ -38,6 +38,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+// Add Done Button for text fields
+        
+        manualRedTF.addDoneButtonKeyboard()
+        manualGreenTF.addDoneButtonKeyboard()
+        manualBlueTF.addDoneButtonKeyboard()
+        
         
 // ColorBoards visual setup
     
@@ -75,7 +82,6 @@ class ViewController: UIViewController {
         manualRedTF.isHidden = true
         manualGreenTF.isHidden = true
         manualBlueTF.isHidden = true
-
     }
     
 // Change color by sliders
@@ -128,26 +134,82 @@ class ViewController: UIViewController {
 // Manual change color
     
     @IBAction func manualRedTFEntering() {
+        
         colorRedValue.text = manualRedTF.text
         sliderColorRed.value = (manualRedTF.text! as NSString).floatValue
-        changeMainColor()
+    
+        guard let inputTextR = manualRedTF.text, !inputTextR.isEmpty else {
+                    manualRedTF.text = "0";
+                    colorRedValue.text = "0";
+                    sliderColorRed.value = 0;
+                    changeMainColor();
+                    return
+                    }
+        
+        let range = 0...10
+        if range.contains(Int(inputTextR)!) {
+            changeMainColor()
+        } else {
+            showAlert(title: "ERROR", message: "Please, enter value between 0 and 10")
+            manualRedTF.text = "0"
+            colorRedValue.text = "0"
+            sliderColorRed.value = 0
+            changeMainColor()
         }
+    }
   
+    
     @IBAction func manualGreenTFEntering() {
         colorGreenValue.text = manualGreenTF.text
         sliderColorGreen.value = (manualGreenTF.text! as NSString).floatValue
-        changeMainColor()
+        
+        guard let inputTextG = manualGreenTF.text, !inputTextG.isEmpty else {
+            manualGreenTF.text = "0";
+            colorGreenValue.text = "0";
+            sliderColorGreen.value = 0;
+            changeMainColor();
+            return
+        }
+        
+        let range = 0...10
+        if range.contains(Int(inputTextG)!) {
+            changeMainColor()
+        } else {
+            showAlert(title: "ERROR", message: "Please, enter value between 0 and 10")
+            manualGreenTF.text = "0"
+            colorGreenValue.text = "0"
+            sliderColorGreen.value = 0
+            changeMainColor()
+        }
     }
 
     @IBAction func manualBlueTFEntering() {
         colorBlueValue.text = manualBlueTF.text
         sliderColorBlue.value = (manualBlueTF.text! as NSString).floatValue
-        changeMainColor()
+        
+        guard let inputTextB = manualBlueTF.text, !inputTextB.isEmpty else {
+            manualBlueTF.text = "0";
+            colorBlueValue.text = "0";
+            sliderColorBlue.value = 0;
+            changeMainColor();
+            return
+        }
+        let range = 0...10
+        if range.contains(Int(inputTextB)!) {
+            changeMainColor()
+        } else {
+            showAlert(title: "ERROR", message: "Please, enter value between 0 and 10")
+            manualBlueTF.text = "0"
+            colorBlueValue.text = "0"
+            sliderColorBlue.value = 0
+            changeMainColor()
+        }
     }
 
 // Manual-sliders switch
     
-    @IBAction func manualPeekOnOff() {
+    @IBAction func manualPickOnOff () {
+    
         colorRedValue.isHidden.toggle()
         colorBlueValue.isHidden.toggle()
         colorGreenValue.isHidden.toggle()
@@ -157,10 +219,10 @@ class ViewController: UIViewController {
         manualRedTF.isHidden.toggle()
         manualGreenTF.isHidden.toggle()
         manualBlueTF.isHidden.toggle()
-        redTF.text = manualPeekSwitch.isOn ? "RED" : "R"
-        greenTF.text = manualPeekSwitch.isOn ? "GREEN" : "G"
-        blueTF.text = manualPeekSwitch.isOn ? "BLUE" : "B"
-        manualPeekLabel.text = manualPeekSwitch.isOn ? "MANUAL PEEK ON" : "MANUAL PEEK OFF"
+        redTF.text = manualPickSwitch.isOn ? "RED" : "R"
+        greenTF.text = manualPickSwitch.isOn ? "GREEN" : "G"
+        blueTF.text = manualPickSwitch.isOn ? "BLUE" : "B"
+        manualPickLabel.text = manualPickSwitch.isOn ? "MANUAL PICK ON" : "MANUAL PICK OFF"
     }
     
 }
@@ -174,5 +236,65 @@ extension ViewController {
             )
     }
 }
+
+// Alert control
+
+extension ViewController {
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        }
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
+}
+
+// Hide Keyboard
+
+extension ViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+    }
+}
+
+// Button Done on keyboard
+
+extension UITextField {
+    @IBInspectable var doneAccessory: Bool {
+        get {
+            return self.doneAccessory
+        }
+        set (hasDone) {
+             addDoneButtonKeyboard()
+        }
+    }
+    
+    func addDoneButtonKeyboard() {
+        
+        let doneToolBar:UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        doneToolBar.barStyle = .default
+        
+        let flexSpace = UIBarButtonItem (barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done:UIBarButtonItem = UIBarButtonItem (title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+        
+        let items = [flexSpace,done]
+        doneToolBar.items = items
+        doneToolBar.sizeToFit()
+        
+        self.inputAccessoryView = doneToolBar
+    }
+    
+    @objc func doneButtonAction() {
+        self.resignFirstResponder()
+    }
+}
+
 
 
